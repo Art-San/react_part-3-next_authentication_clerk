@@ -20,7 +20,9 @@ export const Navigation = () => {
           <div className="flex items-center gap-4">
             <SignedOut>
               <SignInButton>
-                <button className=" bg-gray-900">Войти</button>
+                <button className=" bg-gray-700 text-white px-2 py-1">
+                  Войти
+                </button>
               </SignInButton>
             </SignedOut>
 
@@ -28,7 +30,9 @@ export const Navigation = () => {
             <SignedIn>
               <Link href="/user-profile">Профиль</Link>
               <SignOutButton>
-                <>Выйти</>
+                <button className=" bg-gray-700 text-white px-2 py-1">
+                  Выйти
+                </button>
               </SignOutButton>
             </SignedIn>
           </div>

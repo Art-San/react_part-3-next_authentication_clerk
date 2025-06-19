@@ -23,15 +23,15 @@
 // }
 
 'use client'
-// import { useUser } from '@clerk/nextjs'
+import { useUser } from '@clerk/nextjs'
 import { useState } from 'react'
 
 export const Counter = () => {
   const [count, setCount] = useState(0)
 
-  // const { isLoaded, isSignedIn, user } = useUser()
+  const { isLoaded, isSignedIn } = useUser()
 
-  // if (!isLoaded || !isSignedIn) return null
+  if (!isLoaded || !isSignedIn) return null
 
   // console.log(isSignedIn)
   // console.log(user)
