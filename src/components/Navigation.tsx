@@ -19,8 +19,8 @@ export const Navigation = () => {
           </div>
           <div className="flex items-center gap-4">
             <SignedOut>
-              <SignInButton mode="modal">
-                <>Войти</>
+              <SignInButton>
+                <button className=" bg-gray-900">Войти</button>
               </SignInButton>
             </SignedOut>
 

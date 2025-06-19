@@ -1,6 +1,34 @@
-import { clerkMiddleware } from '@clerk/nextjs/server'
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
+import { NextResponse } from 'next/server'
 
-export default clerkMiddleware()
+// const isProtectedRoute = createRouteMatcher(['/user-profile'])
+
+// export default clerkMiddleware(async (auth, req) => {
+//   if (isProtectedRoute(req)) {
+//     await auth.protect()
+//   }
+// })
+
+const isPublicRoute = createRouteMatcher(['/', '/sign-in(.*)', '/sign-up(.*)'])
+
+const isAdminRoute = createRouteMatcher(['/admin(.*)'])
+
+export default clerkMiddleware(async (auth, req) => {
+  const { userId, redirectToSignIn } = await auth()
+
+  if (
+    isAdminRoute(req) &&
+    (await auth()).sessionClaims?.metadata?.role !== 'admin'
+  ) {
+    const url = new URL('/', req.url)
+    return NextResponse.redirect(url)
+  }
+
+  if (!userId && !isPublicRoute(req)) {
+    // Кастомная логика
+    return redirectToSignIn()
+  }
+})
 
 export const config = {
   matcher: [
